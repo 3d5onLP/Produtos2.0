@@ -13,13 +13,19 @@ public class Produtos {
 
         Scanner scanner = new Scanner(System.in);
         Gerenciadorestoque gerenciador = new Gerenciadorestoque();
+        Produto produto = null;
+        var id = 0;
+        String nome = null;
+        Double preco = null;
+        int quantidade = 0;
 
         while (true) {
+            produto =  null;
             System.out.println("\nMenu:");
             System.out.println("1. Adicionar Produto");
-            System.out.println("2. Listar Produtos");
-            System.out.println("3. Adicionar Estoque");
-            System.out.println("4. Remover Estoque");
+            System.out.println("2. Remover Estoques");
+            System.out.println("3. Listar Produtos");
+            System.out.println("4. Editar Produto");
             System.out.println("5. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
@@ -28,39 +34,44 @@ public class Produtos {
             switch (opcao) {
                 case 1:
                     System.out.print("Descrição do produto: ");
-                    String nome = scanner.nextLine();
+                    nome = scanner.nextLine();
                     System.out.print("Preço do produto: ");
-                    double preco = scanner.nextDouble();
+                    preco = scanner.nextDouble();
                     System.out.print("Quantidade do produto: ");
-                    int quantidade = scanner.nextInt();
-                    Produto produto = new Produto(nome, preco, quantidade);
+                    quantidade = scanner.nextInt();
+                    produto = new Produto(nome, preco, quantidade);
                     gerenciador.addProduto(produto);
                     break;
                 case 2:
                     System.out.println("Id do produto para remoção: ");
-                    var id = scanner.nextInt();
+                    id = scanner.nextInt();
                     gerenciador.deleteProduto(id);
                     break;
 
                 case 3:
-
-                    System.out.printf("O produto %s custa R$ %.2f e temos %d unidades em estoque.%n",
-                            produto.getNome(), produto.getPreco(), produto.getQuantidade());
-
+                    System.out.println("Id do produto para exibição: ");
+                    id = scanner.nextInt();
+                    produto = gerenciador.getProduto(id);
+                    System.out.println(produto.toString());
 
                     break;
-            /*     case 4:
-                    System.out.print("Descrição do produto para remover estoque: ");
-                    String descricaoRemover = scanner.nextLine();
-                    Produto produtoRemover = gerenciador.encontrarProduto(descricaoRemover);
-                    if (produtoRemover != null) {
-                        System.out.print("Quantidade de produto a remover: ");
-                        int qtdRemover = scanner.nextInt();
-                        produtoRemover.removerEstoque(qtdRemover);
-                    } else {
-                        System.out.println("Produto não encontrado.");
-                    }
-                    break;*/
+                case 4:
+                    System.out.println("Id do protudo que  voce quer altera a valor ou quantidade:");
+                    id = scanner.nextInt();
+                    produto = gerenciador.getProduto(id);
+                    System.out.println(produto.toString());
+                    System.out.println("Edite: ");
+                    System.out.println("Descrição do produto: ");
+                    nome = scanner.nextLine();
+                    scanner.nextLine();
+                    System.out.println("Preço do produto: ");
+                    preco = scanner.nextDouble();
+                    System.out.println("Quantidade do produto: ");
+                    quantidade = scanner.nextInt();
+                    produto = new Produto(nome, preco, quantidade);
+                    gerenciador.updateProduto( id, produto);
+
+                    break;
                 case 5:
                     System.out.println("Saindo. Muito obrigado por usar nosso serviços");
                     scanner.close();

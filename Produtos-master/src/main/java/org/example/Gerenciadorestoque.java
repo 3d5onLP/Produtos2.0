@@ -36,4 +36,36 @@ public class Gerenciadorestoque {
         });
 
     }
+    public Produto getProduto(Integer id) {
+        Session session = null;
+        try {
+            session = configuration.openSession();
+            session.beginTransaction();
+            Produto produto = session.get(Produto.class, id);
+            session.getTransaction().commit();
+            return produto;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+
+            }
+        }
+     return null;
+    }
+
+    public Produto updateProduto (Integer id,Produto produto){
+        Produto produto1 = getProduto(id);
+        produto1.setNome(produto.getNome());
+        produto1.setPreco(produto.getPreco());
+        produto1.setQuantidade(produto.getQuantidade());
+        configuration.inTransaction(session -> {
+            session.update(produto1);
+            session.flush();
+
+        });
+        return null;
+    }
+
 }
