@@ -1,14 +1,9 @@
 package org.example;
 
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
-import org.hibernate.cfg.Configuration;
-
-import static org.hibernate.cfg.AvailableSettings.*;
-
-public class Produtos {
+public class index {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -32,8 +27,8 @@ public class Produtos {
             scanner.nextLine();
 
             switch (opcao) {
-                case 1:
-                    System.out.print("Descrição do produto: ");
+                case 1 -> {
+                    System.out.print("Nome do produto: ");
                     nome = scanner.nextLine();
                     System.out.print("Preço do produto: ");
                     preco = scanner.nextDouble();
@@ -41,27 +36,26 @@ public class Produtos {
                     quantidade = scanner.nextInt();
                     produto = new Produto(nome, preco, quantidade);
                     gerenciador.addProduto(produto);
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     System.out.println("Id do produto para remoção: ");
                     id = scanner.nextInt();
                     gerenciador.deleteProduto(id);
-                    break;
+                }
 
-                case 3:
+                case 3 -> {
                     System.out.println("Id do produto para exibição: ");
                     id = scanner.nextInt();
                     produto = gerenciador.getProduto(id);
                     System.out.println(produto.toString());
-
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     System.out.println("Id do protudo que  voce quer altera a valor ou quantidade:");
                     id = scanner.nextInt();
                     produto = gerenciador.getProduto(id);
                     System.out.println(produto.toString());
                     System.out.println("Edite: ");
-                    System.out.println("Descrição do produto: ");
+                    System.out.println("Nome do produto: ");
                     nome = scanner.nextLine();
                     scanner.nextLine();
                     System.out.println("Preço do produto: ");
@@ -70,14 +64,13 @@ public class Produtos {
                     quantidade = scanner.nextInt();
                     produto = new Produto(nome, preco, quantidade);
                     gerenciador.updateProduto( id, produto);
-
-                    break;
-                case 5:
+                }
+                case 5 -> {
                     System.out.println("Saindo. Muito obrigado por usar nosso serviços");
                     scanner.close();
                     return;
-                default:
-                    System.out.println("Opção inválida. Tente novamente.");
+                }
+                default -> System.out.println("Opção inválida. Tente novamente.");
             }
         }
     }

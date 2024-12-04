@@ -1,6 +1,11 @@
 package org.example;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "produtos")
@@ -9,7 +14,7 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_produto")
     private Integer id;
-    @Column(name = "nome_produto")
+    @Column(name = "nome")
     private String nome;
     @Column(name = "preco" )
     private  Double preco;
@@ -28,9 +33,7 @@ public class Produto {
         this.preco = preco;
         this.quantidade = quantidade;
     }
-    public Produto() {
-    }
-
+  
     public String getNome() {
         return nome;
     }
@@ -63,7 +66,7 @@ public class Produto {
                 ", preco=" +String.format("%.2f", preco)+
                 ", quantidade=" + quantidade +
                 '}';
-    }
 
-    }
+    
+    }}
 

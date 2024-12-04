@@ -1,13 +1,20 @@
 package org.example;
 
 
-import static org.hibernate.cfg.AvailableSettings.*;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import static org.hibernate.cfg.JdbcSettings.FORMAT_SQL;
+import static org.hibernate.cfg.JdbcSettings.HIGHLIGHT_SQL;
+import static org.hibernate.cfg.JdbcSettings.PASS;
+import static org.hibernate.cfg.JdbcSettings.SHOW_SQL;
+import static org.hibernate.cfg.JdbcSettings.URL;
+import static org.hibernate.cfg.JdbcSettings.USER;
 
 public class Gerenciadorestoque {
+    
+
+    //FAZ CONEXAO COM O BANCO DE DADOS.... 
     private SessionFactory configuration = new Configuration()
                 .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect")
                 .addAnnotatedClass(Produto.class)
@@ -36,6 +43,7 @@ public class Gerenciadorestoque {
         });
 
     }
+    
     public Produto getProduto(Integer id) {
         Session session = null;
         try {
